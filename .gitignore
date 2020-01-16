@@ -1,0 +1,5 @@
+# Ignore files and folders that starts with 2 underscores
+__*
+
+# Ignore dependencies
+node_modules

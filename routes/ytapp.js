@@ -6,7 +6,8 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('ytapp', { title: 'Domaintest' });
+	console.log('Domaintest')
+	res.send('ytapp.js')
 });
 
 module.exports = router;

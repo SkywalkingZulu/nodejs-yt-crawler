@@ -10,8 +10,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-	//res.render('domaintest', { title: 'Domaintest' });
-	console.log('domaintest.js')
+	console.log('Domaintest')
 	res.send('domaintest.js')
 });
 
