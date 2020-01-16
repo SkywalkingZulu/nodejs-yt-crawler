@@ -6,13 +6,13 @@
  Client-server router
  */
 
-var config = require("conf");
-
 var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('domaintest', { title: 'Domaintest' });
+	//res.render('domaintest', { title: 'Domaintest' });
+	console.log('domaintest.js')
+	res.send('domaintest.js')
 });
 
 router.post('/', function(req, res) {
