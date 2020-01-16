@@ -2,7 +2,9 @@
  * Created by Katamori on 2016.02.16..
  */
 
-var HOSTNAME = "http://" + "localhost" + ":" + "7776" + "/domaintest";
+const http = require('http');
+
+var HOSTNAME = "http://" + "localhost";
 
 var step = -1;
 var size = 0;
@@ -32,16 +34,29 @@ function SendLink(callback) {
             Settexts();
 
     }else{
+			var jsonData = JSON.stringify(data)
 
-            $.ajax({
-                type: 'POST',
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                url: HOSTNAME,
-                success: callback
-            });
+			const req = http.request({
+				method: 'POST',
+				hostname: HOSTNAME,
+				port: 7776,
+				path: '/domaintest',
+				headers: {
+				  'Content-Type': 'application/json',
+				  'Content-Length': jsonData.length
+				}
+			}, callback)
 
-
+			res.on('data', d => {
+				process.stdout.write(d)
+			})
+			
+			req.on('error', error => {
+				console.error(error)
+			})
+			
+			req.write(jsonData)
+			req.end()
     };
 
 
@@ -89,9 +104,7 @@ function Settexts(){
 
 //display JSON in table
 function DisplayPortion(dset, start, end){
-
-
-    var tbl=$("<table/>").attr("id","mytable");
+    /*var tbl=$("<table/>").attr("id","mytable");
     $("#div1").append(tbl);
 
     for(i=start;i<end;i++){
@@ -106,14 +119,14 @@ function DisplayPortion(dset, start, end){
 
         $("#mytable").append(tr+td0+td1+td2+td3+td4+td5);
 
-    };
+    };*/
 
 
 };
 
 //select and show proper form
 //source: http://stackoverflow.com/questions/22441858/displaying-conditional-fields-in-html-using-a-form-select-menu
-$("#task_options").change( function(){
+/*$("#task_options").change( function(){
 
     var selected = $("#task_options option:selected").val();
     $('div').hide();
@@ -123,7 +136,7 @@ $("#task_options").change( function(){
 $(document).ready(function (e) {
     $('div').hide();
     $('#expand').show();
-});
+});*/
 
 
 
